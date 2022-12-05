@@ -3,7 +3,8 @@ const games = [
     _id: 1,
     name: "Elden Ring",
     image: "/images/EldenRing.jpg",
-    description: "lorem",
+    description:
+      "UNE NOUVELLE AVENTURE GRANDIOSE VOUS ATTEND Levez-vous, Sans-éclat, et puisse la grâce guider vos pas. Brandissez la puissance du Cercle d'Elden. Devenez Seigneur de l'Entre-terre.",
     platforms: {
       steam: true,
       xbox_one: true,
@@ -22,7 +23,8 @@ const games = [
     _id: 2,
     name: "Death Stranding",
     image: "/images/DeathStranding.jpg",
-    description: "lorem",
+    description:
+      "L'expérience révolutionnaire du légendaire Hideo Kojima revient encore plus étoffée dans l'édition ultime DIRECTOR'S CUT. Sam Bridges a pour mission de donner de l'espoir à l'humanité en reconnectant tous les survivants d'une Amérique décimée. Parviendrez-vous à réunifier ce monde",
     platforms: {
       steam: true,
       xbox_one: true,
@@ -41,7 +43,8 @@ const games = [
     _id: 3,
     name: "Red Dead Redemption II",
     image: "/images/RDR2.jpg",
-    description: "lorem",
+    description:
+      "Red Dead Redemption 2, le jeu épique en monde ouvert de Rockstar Games acclamé par la critique et le mieux noté de cette génération de consoles, arrive maintenant sur PC avec du contenu inédit pour le mode Histoire, des améliorations graphiques et bien plus.",
     platforms: {
       steam: true,
       xbox_one: true,
@@ -57,10 +60,11 @@ const games = [
     numReviews: 18,
   },
   {
-    _id: 3,
+    _id: 4,
     name: "Cyberpunk 2077",
     image: "/images/Cyberpunk2077.jpg",
-    description: "lorem",
+    description:
+      "Cyberpunk 2077 est un JDR d'action-aventure en monde ouvert, qui se déroule à Night City, une mégalopole futuriste et sombre, obsédée par le pouvoir, la séduction et les modifications corporelles.",
     platforms: {
       steam: true,
       xbox_one: true,
@@ -74,6 +78,46 @@ const games = [
     developper: "CD Projekt Red",
     rating: 4.5,
     numReviews: 30,
+  },
+  {
+    _id: 5,
+    name: "The Witcher 3: Wild Hunt",
+    image: "/images/TheWitcher3.jpg",
+    description:
+      "Alors que la guerre fait rage à travers les royaumes du Nord, vous acceptez le contrat de votre vie et partez à la recherche de l'enfant de la prophétie, une arme vivante capable de changer le monde.",
+    platforms: {
+      steam: true,
+      xbox_one: true,
+      playstation_5: true,
+      playstation_4: true,
+      xbox_series: true,
+      nintendo_switch: true,
+    },
+    release_date: "18 Mai, 2020",
+    price: 39.99,
+    developper: "CD Projekt Red",
+    rating: 4.5,
+    numReviews: 126,
+  },
+  {
+    _id: 6,
+    name: "The Elder Scrolls V: Skyrim Special Edition",
+    image: "/images/SkyrimSpecialEdition.jpg",
+    description:
+      "Lauréat de plus de 200 récompenses du Jeu de l'année ! Skyrim Special Edition apporte un souffle nouveau à cette aventure épique, avec force détail. La Special Edition comprend le célèbre jeu et les contenus additionnels, avec graphismes et effets remasterisés, rayons divins volumétriques, profondeur de champ dynamique, reflets et plus encore. Skyrim Special Edition apporte en outre toute la puissance des mods PC sur console.  Nouvelles quêtes, environnements, personnages, dialogue, armure, armes et plus encore... l'expérience est sans limite.",
+    platforms: {
+      steam: true,
+      xbox_one: true,
+      playstation_5: true,
+      playstation_4: true,
+      xbox_series: true,
+      nintendo_switch: true,
+    },
+    release_date: "26 Oct, 2016",
+    price: 39.99,
+    developper: "Bethesda",
+    rating: 4.5,
+    numReviews: 99,
   },
 ];
 

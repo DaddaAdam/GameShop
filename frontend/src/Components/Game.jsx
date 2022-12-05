@@ -7,7 +7,7 @@ const Game = ({ game }) => {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/game/${game._id}`}>
-        <Card.Img src={game.image} variant="top" height={"400px"} />
+        <Card.Img src={game.image} variant="top" height={"450px"} />
       </Link>
       <Card.Body>
         <Link to={`/game/${game._id}`}>
