@@ -1,6 +1,9 @@
-const express = require("express");
-const games = require("./data/games");
+import express from "express";
+import dotenv from "dotenv";
+import games from "./data/games.js";
+
 const app = express();
+dotenv.config();
 
 app.get("/api/games", (req, res) => {
   res.json(games);
@@ -11,4 +14,9 @@ app.get("/api/games/:id", (req, res) => {
   res.json(game);
 });
 
-app.listen(5000, console.log("Server running on port 5000."));
+const port = process.env.PORT || 5000;
+
+app.listen(
+  port,
+  console.log(`Server running in ${process.env.NODE_ENV} on port ${port}.`)
+);

@@ -12,7 +12,6 @@ const Gamescreen = props => {
   useEffect(() => {
     const fetchgame = async () => {
       const { data } = await axios.get(`/api/games/${id}`);
-      console.log(id);
       setGame(data);
     };
     fetchgame();
