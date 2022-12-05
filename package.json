@@ -1,0 +1,23 @@
+{
+  "name": "gameshop",
+  "version": "1.0.0",
+  "description": "React + Express games store",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaddaAdam/GameShop.git"
+  },
+  "author": "Adam Dadda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaddaAdam/GameShop/issues"
+  },
+  "homepage": "https://github.com/DaddaAdam/GameShop#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

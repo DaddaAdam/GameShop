@@ -97,11 +97,11 @@ const games = [
     price: 39.99,
     developper: "CD Projekt Red",
     rating: 4.5,
-    numReviews: 126,
+    numReviews: 26,
   },
   {
     _id: 6,
-    name: "The Elder Scrolls V: Skyrim Special Edition",
+    name: "The Elder Scrolls V: Skyrim",
     image: "/images/SkyrimSpecialEdition.jpg",
     description:
       "Lauréat de plus de 200 récompenses du Jeu de l'année ! Skyrim Special Edition apporte un souffle nouveau à cette aventure épique, avec force détail. La Special Edition comprend le célèbre jeu et les contenus additionnels, avec graphismes et effets remasterisés, rayons divins volumétriques, profondeur de champ dynamique, reflets et plus encore. Skyrim Special Edition apporte en outre toute la puissance des mods PC sur console.  Nouvelles quêtes, environnements, personnages, dialogue, armure, armes et plus encore... l'expérience est sans limite.",
@@ -121,4 +121,4 @@ const games = [
   },
 ];
 
-export default games;
+module.exports = games;

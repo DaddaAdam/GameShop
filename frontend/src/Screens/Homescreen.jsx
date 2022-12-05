@@ -1,9 +1,17 @@
-import React from "react";
-import games from "../games";
+import { React, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Game from "../Components/Game";
+import axios from "axios";
 
 const Homescreen = () => {
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    const fetchgames = async () => {
+      const { data } = await axios.get("/api/games/");
+      setGames(data);
+    };
+    fetchgames();
+  }, []);
   return (
     <>
       <Row>
