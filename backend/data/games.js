@@ -1,6 +1,5 @@
 const games = [
   {
-    _id: 1,
     name: "Elden Ring",
     image: "/images/EldenRing.jpg",
     description:
@@ -13,14 +12,13 @@ const games = [
       xbox_series: true,
       nintendo_switch: false,
     },
-    release_date: "25 Feb, 2022",
+    release_date: new Date("2022-2-25"),
     price: 59.99,
     developper: "FromSoftware",
     rating: 4.5,
     numReviews: 53,
   },
   {
-    _id: 2,
     name: "Death Stranding",
     image: "/images/DeathStranding.jpg",
     description:
@@ -33,14 +31,13 @@ const games = [
       xbox_series: true,
       nintendo_switch: false,
     },
-    release_date: "30 Mar, 2022",
+    release_date: new Date("2022-3-30"),
     price: 39.99,
     developper: "Kojima Productions",
     rating: 4.5,
     numReviews: 10,
   },
   {
-    _id: 3,
     name: "Red Dead Redemption II",
     image: "/images/RDR2.jpg",
     description:
@@ -53,14 +50,13 @@ const games = [
       xbox_series: true,
       nintendo_switch: false,
     },
-    release_date: "5 Dec, 2019",
+    release_date: new Date("2019-12-5"),
     price: 59.99,
     developper: "Rockstar Games",
     rating: 4.5,
     numReviews: 18,
   },
   {
-    _id: 4,
     name: "Cyberpunk 2077",
     image: "/images/Cyberpunk2077.jpg",
     description:
@@ -73,14 +69,13 @@ const games = [
       xbox_series: true,
       nintendo_switch: false,
     },
-    release_date: "5 Dec, 2020",
+    release_date: new Date("2020-12-5"),
     price: 59.99,
     developper: "CD Projekt Red",
     rating: 4.5,
     numReviews: 30,
   },
   {
-    _id: 5,
     name: "The Witcher 3: Wild Hunt",
     image: "/images/TheWitcher3.jpg",
     description:
@@ -93,14 +88,13 @@ const games = [
       xbox_series: true,
       nintendo_switch: true,
     },
-    release_date: "18 Mai, 2020",
+    release_date: new Date("2015-5-18"),
     price: 39.99,
     developper: "CD Projekt Red",
     rating: 4.5,
     numReviews: 26,
   },
   {
-    _id: 6,
     name: "The Elder Scrolls V: Skyrim",
     image: "/images/SkyrimSpecialEdition.jpg",
     description:
@@ -113,7 +107,7 @@ const games = [
       xbox_series: true,
       nintendo_switch: true,
     },
-    release_date: "26 Oct, 2016",
+    release_date: new Date("2016-10-26"),
     price: 39.99,
     developper: "Bethesda",
     rating: 4.5,

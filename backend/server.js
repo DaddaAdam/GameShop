@@ -1,20 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
-import games from "./data/games.js";
+import connectDB from "./config/db.js";
+import gameRoutes from "./routes/gameRoutes.js";
 
 const app = express();
 dotenv.config();
 
-app.get("/api/games", (req, res) => {
-  res.json(games);
-});
+connectDB(process.env.CONNECTION_STRING);
 
-app.get("/api/games/:id", (req, res) => {
-  const game = games.find(g => g._id == req.params.id);
-  res.json(game);
-});
+app.use("/api/games", gameRoutes);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 app.listen(
   port,
