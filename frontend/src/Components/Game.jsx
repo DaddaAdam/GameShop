@@ -10,7 +10,7 @@ const Game = ({ game }) => {
         <Card.Img
           src={game.image}
           variant="top"
-          style={{ maxHeight: "350px" }}
+          style={{ maxHeight: "362px" }}
         />
       </Link>
       <Card.Body>

@@ -1,8 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { gameListReducer } from "./reducers/gameReducers";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  gameList: gameListReducer,
+});
 
 const initialState = {};
 
