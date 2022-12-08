@@ -12,6 +12,7 @@ const Gamescreen = props => {
   useEffect(() => {
     const fetchgame = async () => {
       const { data } = await axios.get(`/api/games/${id}`);
+
       setGame(data);
     };
     fetchgame();
@@ -42,7 +43,7 @@ const Gamescreen = props => {
               <ListGroup.Item>{game.description}</ListGroup.Item>
               <ListGroup.Item>
                 Éditeur: {game.developper} <br /> Date de sortie:{" "}
-                {game.release_date}
+                {new Date(game.release_date).toLocaleDateString("fr")}
               </ListGroup.Item>
             </ListGroup>
           </Col>
