@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Homescreen from "./Screens/Homescreen";
 import Gamescreen from "./Screens/Gamescreen";
+import CartScreen from "./Screens/CartScreen";
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Homescreen />} />
             <Route path="/game/:id" element={<Gamescreen />} />
+            <Route path="/cart/">
+              <Route index element={<CartScreen />} />
+              <Route path=":id" element={<CartScreen />} />
+            </Route>
           </Routes>
         </Container>
       </main>

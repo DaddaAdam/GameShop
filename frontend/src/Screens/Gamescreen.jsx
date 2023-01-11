@@ -1,29 +1,44 @@
-import { React, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { React, useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { NintendoSwitch } from "react-bootstrap-icons";
 import Rating from "../Components/Rating";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { listGameDetails } from "../actions/gameActions";
+import Loader from "../Components/Loader";
+import Message from "../Components/Message";
 
 const Gamescreen = props => {
-  const [game, setGame] = useState([]);
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
+  const [selectedPlatform, setSelectedPlatform] = useState("");
+
+  const dispatch = useDispatch();
+
+  const gameDetails = useSelector(state => state.gameDetails);
+
+  const { loading, error, game } = gameDetails;
+
   useEffect(() => {
-    const fetchgame = async () => {
-      const { data } = await axios.get(`/api/games/${id}`);
+    dispatch(listGameDetails(id));
+  }, [dispatch, id]);
 
-      setGame(data);
-    };
-    fetchgame();
-  }, []);
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}?platform=${selectedPlatform}`);
+  };
 
-  if (game.platforms) {
-    return (
-      <>
-        <Link className="btn btn-light my-3" to="/">
-          Retour
-        </Link>
+  return (
+    <>
+      <Link className="btn btn-light my-3" to="/">
+        Retour
+      </Link>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
         <Row>
           <Col md={6} lg={5}>
             <Image src={game.image} fluid />
@@ -59,36 +74,70 @@ const Gamescreen = props => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Row>
-                    <Col>Plateformes:</Col>
-                    <Col>
-                      {game.platforms.steam && (
-                        <i className="fa-brands fa-steam" />
-                      )}{" "}
-                    </Col>
-                    <Col>
-                      {(game.platforms.xbox_one ||
-                        game.platforms.xbox_series) && (
-                        <i className="fa-brands fa-xbox" />
-                      )}
-                    </Col>
-                    <Col>
-                      {(game.platforms.playstation_4 ||
-                        game.platforms.playstation_5) && (
-                        <i className="fa-brands fa-playstation" />
-                      )}
-                    </Col>
-
-                    {game.platforms.nintendo_switch && (
+                  {game.platforms ? (
+                    <Row>
+                      <Col>Plateformes:</Col>
                       <Col>
-                        <NintendoSwitch />
+                        {game.platforms.steam && (
+                          <i
+                            className={`fa-brands fa-steam ${
+                              selectedPlatform === "steam" && "fa-lg fa-bounce"
+                            }`}
+                            onClick={() => setSelectedPlatform("steam")}
+                          />
+                        )}{" "}
                       </Col>
-                    )}
-                  </Row>
+                      <Col>
+                        {(game.platforms.xbox_one ||
+                          game.platforms.xbox_series) && (
+                          <i
+                            className={`fa-brands fa-xbox ${
+                              selectedPlatform === "xbox" && "fa-lg fa-bounce"
+                            }`}
+                            onClick={() => setSelectedPlatform("xbox")}
+                          />
+                        )}
+                      </Col>
+                      <Col>
+                        {(game.platforms.playstation_4 ||
+                          game.platforms.playstation_5) && (
+                          <i
+                            className={`fa-brands fa-playstation ${
+                              selectedPlatform === "playstation" &&
+                              "fa-lg fa-bounce"
+                            }`}
+                            onClick={() => setSelectedPlatform("playstation")}
+                          />
+                        )}
+                      </Col>
+
+                      {game.platforms.nintendo_switch && (
+                        <Col>
+                          <NintendoSwitch
+                            className={
+                              selectedPlatform === "nintendo_switch"
+                                ? "fa-lg fa-bounce"
+                                : "fa-sm"
+                            }
+                            onClick={() =>
+                              setSelectedPlatform("nintendo_switch")
+                            }
+                          />
+                        </Col>
+                      )}
+                    </Row>
+                  ) : (
+                    <></>
+                  )}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Button className="btn-block" type="button">
+                    <Button
+                      onClick={addToCartHandler}
+                      className="btn-block"
+                      type="button"
+                      disabled={selectedPlatform === ""}
+                    >
                       Ajouter au panier
                     </Button>
                   </Row>
@@ -97,11 +146,9 @@ const Gamescreen = props => {
             </Card>
           </Col>
         </Row>
-      </>
-    );
-  } else {
-    return <></>;
-  }
+      )}
+    </>
+  );
 };
 
 export default Gamescreen;

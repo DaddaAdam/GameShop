@@ -18,13 +18,13 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"> </i>
-                  Panier
+                  {" Panier"}
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
                 <Nav.Link>
                   <i className="fas fa-user"> </i>
-                  S'identifier
+                  {" S'identifier"}
                 </Nav.Link>
               </LinkContainer>
             </Nav>
