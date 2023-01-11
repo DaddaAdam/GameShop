@@ -7,7 +7,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 import {
   Row,
   Col,
@@ -40,6 +40,11 @@ const CartScreen = () => {
 
   const removeFromCartHandler = id => {
     console.log("remove from cart");
+    dispatch(removeFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    navigate("/login?redirect=shipping");
   };
 
   return (
@@ -56,7 +61,7 @@ const CartScreen = () => {
               cartItems.map(item => (
                 <ListGroup.Item key={item.game}>
                   <Row>
-                    <Col md={2}>
+                    <Col md={3}>
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
@@ -65,14 +70,17 @@ const CartScreen = () => {
                     <Col md={2}>${item.price}</Col>
                     <Col md={2}>
                       <i
-                        className={`fa-brands fa-${item.selectedPlatform} fa-2xl`}
+                        className={`fa-brands fa-${item.selectedPlatform} fa-xl`}
                       />
                     </Col>
                     <Col md={2}>
-                      <i
-                        className="fas fa-trash fa-lg"
+                      <Button
+                        variant="light"
+                        type="button"
                         onClick={() => removeFromCartHandler(item.game)}
-                      />
+                      >
+                        <i className="fas fa-trash fa-xl" />
+                      </Button>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -83,9 +91,28 @@ const CartScreen = () => {
           </ListGroup>
         )}
       </Col>
-      <Col md={2}></Col>
-
-      <Col md={2}></Col>
+      <Col md={4}>
+        <Card>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <h2>Sous-total ({cartItems.length}) jeux</h2>$
+              {cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Row>
+                <Button
+                  type="button"
+                  className="btn-block"
+                  disabled={cartItems.length === 0}
+                  onClick={checkoutHandler}
+                >
+                  Paiement
+                </Button>
+              </Row>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+      </Col>
     </Row>
   );
 };
