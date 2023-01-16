@@ -6,6 +6,7 @@ import Homescreen from "./Screens/Homescreen";
 import Gamescreen from "./Screens/Gamescreen";
 import CartScreen from "./Screens/CartScreen";
 import LoginScreen from "./Screens/LoginScreen";
+import RegisterScreen from "./Screens/RegisterScreen";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/game/:id" element={<Gamescreen />} />
             <Route path="/login" element={<LoginScreen />} />
+            <Route path="/register" element={<RegisterScreen />} />
             <Route path="/cart/">
               <Route index element={<CartScreen />} />
               <Route path=":id" element={<CartScreen />} />
