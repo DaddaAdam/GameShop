@@ -7,6 +7,7 @@ import Gamescreen from "./Screens/Gamescreen";
 import CartScreen from "./Screens/CartScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 function App() {
   return (
@@ -15,14 +16,15 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
+            <Route exact path="/" element={<Homescreen />} />
             <Route path="/game/:id" element={<Gamescreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+            <Route path="/profile" element={<ProfileScreen />} />
             <Route path="/cart/">
               <Route index element={<CartScreen />} />
               <Route path=":id" element={<CartScreen />} />
             </Route>
-            <Route exact path="/" element={<Homescreen />} />
           </Routes>
         </Container>
       </main>
