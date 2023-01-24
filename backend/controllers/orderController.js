@@ -17,7 +17,6 @@ const addOrderItems = expressAsyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("ERREUR: aucun article ne se trouve dans le panier.");
-    return;
   } else {
     const order = new Order({
       orderItems,
@@ -84,4 +83,15 @@ const updateOrderToPaid = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// @desc    Récupère les commandes d'un utilisateur
+// @route   GET /api/orders/myorders
+// @access  Private
+const getMyOrders = expressAsyncHandler(async (req, res) => {
+  const orders = await Order.find({
+    user: req.user._id,
+  });
+
+  res.json(orders);
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
