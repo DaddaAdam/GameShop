@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../Components/FormContainer";
 import { savePaymentMethod } from "../actions/cartActions";
@@ -41,6 +41,7 @@ const PaymentScreen = () => {
               onChange={e => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
+
           <Button type="submit" variant="primary">
             Continuer
           </Button>
