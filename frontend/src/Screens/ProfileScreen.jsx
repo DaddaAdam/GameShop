@@ -127,7 +127,7 @@ const ProfileScreen = () => {
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{new Date(order.createdAt).toLocaleDateString("fr")}</td>
-                  <td>{order.totalPrice}</td>
+                  <td>${order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (
                       new Date(order.paidAt).toLocaleDateString("fr")
@@ -136,8 +136,11 @@ const ProfileScreen = () => {
                     )}
                   </td>
                   <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm">Details</Button>
+                    <LinkContainer
+                      to={`/order/${order._id}`}
+                      className="d-grid gap-2"
+                    >
+                      <Button className="btn-sm btn-block">Détails</Button>
                     </LinkContainer>
                   </td>
                 </tr>

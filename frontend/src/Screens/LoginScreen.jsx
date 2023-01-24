@@ -18,15 +18,13 @@ const LoginScreen = () => {
 
   const { loading, error, userInfo } = userLogin;
 
-  const redirect = searchParams.get("redirect")
-    ? searchParams.get("redirect")
-    : "/";
+  const redirect = searchParams.get("redirect");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`/${redirect}`);
+      navigate(`/${redirect ? redirect : ""}`);
     }
   }, [navigate, userInfo, redirect]);
 
