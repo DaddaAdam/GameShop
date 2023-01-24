@@ -8,15 +8,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartActions";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 
 const CartScreen = () => {
   const { id } = useParams();

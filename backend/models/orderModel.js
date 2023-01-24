@@ -20,6 +20,10 @@ const orderSchema = mongoose.Schema({
         type: Number,
         required: true,
       },
+      selectedPlatform: {
+        type: String,
+        required: true,
+      },
       game: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
