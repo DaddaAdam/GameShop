@@ -9,7 +9,6 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
-import { updateUserProfile } from "./actions/userActions";
 
 const reducer = combineReducers({
   gameList: gameListReducer,
@@ -29,8 +28,17 @@ const userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo"))
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const shippingAddressFromStorage = JSON.parse(
+  localStorage.getItem("shippingAddress")
+)
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : null;
+
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 };
 
