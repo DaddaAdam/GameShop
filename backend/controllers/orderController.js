@@ -55,4 +55,33 @@ const getOrderById = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById };
+// @desc    Mettre à jour le statut du paiement de la commande
+// @route   PUT /api/orders/:id/pay
+// @access  Private
+const updateOrderToPaid = expressAsyncHandler(async (req, res) => {
+  //On récupére la commande et on y ajoute le nom et l'email de l'utilisateur qui a passé la commande
+  const order = await Order.findById(req.params.id);
+  try {
+    if (order) {
+      order.isPaid = true;
+      order.paidAt = Date.now();
+      order.paymentResult = {
+        id: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.payer.email_address,
+      };
+
+      const updatedOrder = await order.save();
+
+      res.json(updatedOrder);
+    } else
+      res.status(404).json({
+        message: "La commande specifie n'existe pas.",
+      });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid };
