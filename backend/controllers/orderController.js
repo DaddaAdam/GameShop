@@ -34,4 +34,25 @@ const addOrderItems = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems };
+// @desc    Récupérer une commande par son Id
+// @route   GET /api/orders/:id
+// @access  Private
+const getOrderById = expressAsyncHandler(async (req, res) => {
+  //On récupére la commande et on y ajoute le nom et l'email de l'utilisateur qui a passé la commande
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+  try {
+    if (order) {
+      res.json(order);
+    } else
+      res.status(404).json({
+        message: "La commande specifie n'existe pas.",
+      });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+export { addOrderItems, getOrderById };
