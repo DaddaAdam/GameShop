@@ -5,12 +5,12 @@ import Rating from "./Rating";
 
 const Game = ({ game }) => {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="h-100 my-3 p-3 rounded">
       <Link to={`/game/${game._id}`}>
         <Card.Img
           src={game.image}
           variant="top"
-          style={{ maxHeight: "362px" }}
+          style={{ maxHeight: "350px" }}
         />
       </Link>
       <Card.Body>

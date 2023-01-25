@@ -9,6 +9,9 @@ import {
   GAME_DELETE_REQUEST,
   GAME_DELETE_SUCCESS,
   GAME_DELETE_FAIL,
+  GAME_CREATE_REQUEST,
+  GAME_CREATE_SUCCESS,
+  GAME_CREATE_FAIL,
 } from "../constants/gameConstants";
 
 export const listGames = () => async dispatch => {
@@ -72,6 +75,39 @@ export const deleteGame = id => async (dispatch, getState) => {
   } catch (err) {
     dispatch({
       type: GAME_DELETE_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const createGame = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GAME_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(`/api/games`, {}, config);
+
+    dispatch({
+      type: GAME_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GAME_CREATE_FAIL,
       payload:
         err.response && err.response.data.message
           ? err.response.data.message

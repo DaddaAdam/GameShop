@@ -5,9 +5,10 @@ import { NintendoSwitch } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../Components/Message";
 import Loader from "../Components/Loader";
-import { listGames, deleteGame } from "../actions/gameActions";
+import { listGames, createGame, deleteGame } from "../actions/gameActions";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import { GAME_CREATE_RESET } from "../constants/gameConstants";
 
 const GameListScreen = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,23 @@ const GameListScreen = () => {
   const { userInfo } = userLogin;
 
   const gameDelete = useSelector(state => state.gameDelete);
-  const { success: successDelete } = gameDelete;
+  const {
+    loading: loadingDelete,
+    success: successDelete,
+    error: errorDelete,
+  } = gameDelete;
 
-  const createGameHandler = () => {};
+  const gameCreate = useSelector(state => state.gameCreate);
+  const {
+    loading: loadingCreate,
+    success: successCreate,
+    error: errorCreate,
+    game: createdGame,
+  } = gameCreate;
+
+  const createGameHandler = () => {
+    dispatch(createGame());
+  };
 
   const deleteHandler = id => {
     if (window.confirm("Voulez-vous vraiment supprimer ce jeu?")) {
@@ -31,12 +46,15 @@ const GameListScreen = () => {
   };
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listGames());
-    } else {
-      navigate("/login");
-    }
-  }, [dispatch, userInfo, navigate, successDelete]);
+    dispatch({
+      type: GAME_CREATE_RESET,
+    });
+
+    if (!userInfo.isAdmin) navigate("/login");
+
+    if (successCreate) navigate(`/admin/game/${createdGame._id}/edit`);
+    dispatch(listGames());
+  }, [dispatch, userInfo, navigate, successDelete, successCreate, createdGame]);
   return (
     <>
       <Row className="align-items-center">
@@ -49,6 +67,10 @@ const GameListScreen = () => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -73,7 +95,7 @@ const GameListScreen = () => {
                   <Link to={`/game/${game._id}`}>{game.name}</Link>
                 </td>
                 <td>{game.developper}</td>
-                <td>${game.price}</td>
+                <td>${game.price.toFixed(2)}</td>
                 <td>
                   {(game.platforms.playstation_4 ||
                     game.platforms.playstation_5) && (
@@ -89,7 +111,7 @@ const GameListScreen = () => {
                 </td>
                 <td>
                   <LinkContainer to={`/admin/game/${game._id}/edit`}>
-                    <Button variant="light" classname="btn-sm">
+                    <Button variant="light" className="btn-sm">
                       <i className="fas fa-edit" />
                     </Button>
                   </LinkContainer>

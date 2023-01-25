@@ -28,7 +28,7 @@ const getGameById = expressAsyncHandler(async (req, res) => {
 });
 
 // @desc    Supprimer un jeu
-// @route   DELETE /api/users
+// @route   DELETE /api/games/:id
 // @access  Private/Admin
 const deleteGame = expressAsyncHandler(async (req, res) => {
   const game = await Game.findById(req.params.id);
@@ -44,4 +44,59 @@ const deleteGame = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { getGames, getGameById, deleteGame };
+// @desc    Ajouter un jeu
+// @route   POST /api/games
+// @access  Private/Admin
+const createGame = expressAsyncHandler(async (req, res) => {
+  const game = new Game({
+    name: "Nom du jeu",
+    image: "/images/RDR2.jpg",
+    description: "Description du jeu",
+    release_date: Date.now(),
+    developper: "Éditeur du jeu",
+    reviews: [],
+  });
+
+  const createdGame = await game.save();
+  res.status(201).json(createdGame);
+});
+
+// @desc    Modifier un jeu
+// @route   PUT /api/games/:id
+// @access  Private/Admin
+const updateGame = expressAsyncHandler(async (req, res) => {
+  const {
+    name,
+    image,
+    description,
+    platforms,
+    release_date,
+    price,
+    developper,
+    reviews,
+    rating,
+    numReviews,
+  } = req.body;
+
+  const game = await Game.findById(req.params.id);
+  if (game) {
+    game.name = name;
+    game.image = image;
+    game.description = description;
+    game.platforms = platforms;
+    game.release_date = release_date;
+    game.price = price;
+    game.developper = developper;
+    game.reviews = reviews;
+    game.rating = rating;
+    game.numReviews = numReviews;
+
+    const updatedGame = await game.save();
+    res.json(updatedGame);
+  } else {
+    res.status(404);
+    throw new Error("Le jeu spécifié n'existe pas.");
+  }
+});
+
+export { getGames, getGameById, createGame, updateGame, deleteGame };
