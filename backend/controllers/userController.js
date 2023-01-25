@@ -126,8 +126,45 @@ const deleteUser = expressAsyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("L'utilisateur spécifié n'existe pas.");
   }
+});
 
-  res.json(users);
+// @desc    Retourne un utilisateur par son ID
+// @route   GET /api/users/:id
+// @access  Private/Admin
+const getUser = expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("L'utilisateur spécifié n'existe pas.");
+  }
+});
+
+// @desc    Modifier le profil d'un utilisateur
+// @route   PUT /api/users/:id
+// @access  Private/Admin
+const updateUser = expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("ERREUR: données invalides.");
+  }
 });
 
 export {
@@ -136,5 +173,7 @@ export {
   registerUser,
   updateUserProfile,
   getUsers,
+  getUser,
+  updateUser,
   deleteUser,
 };
