@@ -5,7 +5,7 @@ import { NintendoSwitch } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../Components/Message";
 import Loader from "../Components/Loader";
-import { listGames } from "../actions/gameActions";
+import { listGames, deleteGame } from "../actions/gameActions";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -19,11 +19,14 @@ const GameListScreen = () => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
+  const gameDelete = useSelector(state => state.gameDelete);
+  const { success: successDelete } = gameDelete;
+
   const createGameHandler = () => {};
 
   const deleteHandler = id => {
-    if (window.confirm("Voulez-vous vraiment supprimer cet utilisateur?")) {
-      // dispatch(deleteUser(id));
+    if (window.confirm("Voulez-vous vraiment supprimer ce jeu?")) {
+      dispatch(deleteGame(id));
     }
   };
 
@@ -33,7 +36,7 @@ const GameListScreen = () => {
     } else {
       navigate("/login");
     }
-  }, [dispatch, userInfo, navigate]);
+  }, [dispatch, userInfo, navigate, successDelete]);
   return (
     <>
       <Row className="align-items-center">

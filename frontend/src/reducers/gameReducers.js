@@ -5,6 +5,9 @@ import {
   GAME_DETAILS_REQUEST,
   GAME_DETAILS_SUCCESS,
   GAME_DETAILS_FAIL,
+  GAME_DELETE_REQUEST,
+  GAME_DELETE_SUCCESS,
+  GAME_DELETE_FAIL,
 } from "../constants/gameConstants";
 
 export const gameListReducer = (state = { games: [] }, action) => {
@@ -30,6 +33,19 @@ export const gameDetailsReducer = (
     case GAME_DETAILS_SUCCESS:
       return { loading: false, game: action.payload };
     case GAME_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const gameDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GAME_DELETE_REQUEST:
+      return { loading: true };
+    case GAME_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case GAME_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
