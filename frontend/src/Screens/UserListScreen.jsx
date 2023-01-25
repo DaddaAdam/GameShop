@@ -34,6 +34,7 @@ const UserListScreen = () => {
   }, [dispatch, userInfo, navigate, successDelete]);
   return (
     <>
+      <h1>Utilisateurs</h1>
       {loading ? (
         <Loader />
       ) : error ? (
