@@ -5,6 +5,7 @@ import {
   gameListReducer,
   gameDetailsReducer,
   gameCreateReducer,
+  gameUpdateReducer,
   gameDeleteReducer,
 } from "./reducers/gameReducers";
 import { cartReducer } from "./reducers/cartReducers";
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   gameList: gameListReducer,
   gameDetails: gameDetailsReducer,
   gameCreate: gameCreateReducer,
+  gameUpdate: gameUpdateReducer,
   gameDelete: gameDeleteReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,

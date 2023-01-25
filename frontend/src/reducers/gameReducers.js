@@ -12,6 +12,10 @@ import {
   GAME_CREATE_SUCCESS,
   GAME_CREATE_FAIL,
   GAME_CREATE_RESET,
+  GAME_UPDATE_REQUEST,
+  GAME_UPDATE_SUCCESS,
+  GAME_UPDATE_FAIL,
+  GAME_UPDATE_RESET,
 } from "../constants/gameConstants";
 
 export const gameListReducer = (state = { games: [] }, action) => {
@@ -66,6 +70,24 @@ export const gameCreateReducer = (state = { game: {} }, action) => {
       return { loading: false, error: action.payload };
     case GAME_CREATE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const gameUpdateReducer = (state = { game: {} }, action) => {
+  switch (action.type) {
+    case GAME_UPDATE_REQUEST:
+      return { loading: true };
+    case GAME_UPDATE_SUCCESS:
+      return { loading: false, success: true, game: action.payload };
+    case GAME_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case GAME_UPDATE_RESET: {
+      return {
+        game: {},
+      };
+    }
     default:
       return state;
   }

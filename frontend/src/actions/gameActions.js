@@ -12,6 +12,9 @@ import {
   GAME_CREATE_REQUEST,
   GAME_CREATE_SUCCESS,
   GAME_CREATE_FAIL,
+  GAME_UPDATE_REQUEST,
+  GAME_UPDATE_SUCCESS,
+  GAME_UPDATE_FAIL,
 } from "../constants/gameConstants";
 
 export const listGames = () => async dispatch => {
@@ -108,6 +111,45 @@ export const createGame = () => async (dispatch, getState) => {
   } catch (err) {
     dispatch({
       type: GAME_CREATE_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const updateGame = game => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GAME_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/games/${game._id}`, game, config);
+
+    dispatch({
+      type: GAME_UPDATE_SUCCESS,
+      payload: data,
+    });
+
+    dispatch({
+      type: GAME_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GAME_UPDATE_FAIL,
       payload:
         err.response && err.response.data.message
           ? err.response.data.message
