@@ -24,12 +24,15 @@
   },
   "homepage": "https://github.com/DaddaAdam/GameShop#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.258.0",
+    "@aws-sdk/s3-request-presigner": "^3.258.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.0",
+    "multer": "^1.4.5-lts.1",
     "react-redux": "^8.0.5"
   },
   "devDependencies": {

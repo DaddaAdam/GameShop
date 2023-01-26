@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +32,7 @@ const GameEditScreen = () => {
   const [platforms, setPlatforms] = useState({});
   const [release_date, setRelease_date] = useState(new Date());
   const [developper, setDevelopper] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (successUpdate) {
@@ -51,6 +53,28 @@ const GameEditScreen = () => {
       setDevelopper(game.developper);
     }
   }, [game, dispatch, id, successUpdate, navigate]);
+
+  const uploadFileHandler = async e => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/uploads", formData, config);
+      console.log(data);
+      setImage(data);
+      setUploading(false);
+    } catch (err) {
+      console.error(error);
+      uploading(false);
+    }
+  };
 
   const submitHandler = e => {
     e.preventDefault();
@@ -103,6 +127,12 @@ const GameEditScreen = () => {
                 value={image}
                 onChange={e => setImage(e.target.value)}
               ></Form.Control>
+              <Form.Control
+                type="file"
+                label="Sélectionner un fichier"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+              {uploading && <Loader />}
             </Form.Group>
             <Form.Group controlId="price">
               <Form.Label>Prix</Form.Label>
