@@ -16,6 +16,7 @@ import { listGameDetails, gameCreateReview } from "../actions/gameActions";
 import Loader from "../Components/Loader";
 import Message from "../Components/Message";
 import { GAME_CREATE_REVIEW_RESET } from "../constants/gameConstants";
+import Meta from "../Components/Meta";
 
 const Gamescreen = props => {
   const { id } = useParams();
@@ -57,6 +58,7 @@ const Gamescreen = props => {
 
   return (
     <>
+      <Meta title={game.name} />
       <Link className="btn btn-light my-3" to="/">
         Retour
       </Link>

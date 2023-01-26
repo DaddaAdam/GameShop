@@ -1,8 +1,9 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import Game from "../Components/Game";
+import Meta from "../Components/Meta";
 import { listGames } from "../actions/gameActions";
 import Loader from "../Components/Loader";
 import Message from "../Components/Message";
@@ -23,7 +24,14 @@ const Homescreen = () => {
 
   return (
     <>
-      {!keyword && <GameCarousel />}
+      <Meta title={keyword ? `Résultats pour '${keyword}'` : "Home"} />
+      {!keyword ? (
+        <GameCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Retour
+        </Link>
+      )}
       <h1>Jeux à la une</h1>
       {loading ? (
         <Loader />

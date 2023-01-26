@@ -10,6 +10,7 @@ import { listGames, createGame, deleteGame } from "../actions/gameActions";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { GAME_CREATE_RESET } from "../constants/gameConstants";
+import Meta from "../Components/Meta";
 
 const GameListScreen = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const GameListScreen = () => {
   ]);
   return (
     <>
+      <Meta title="Jeux" />
       <Row className="align-items-center">
         <Col>
           <h1>Jeux</h1>

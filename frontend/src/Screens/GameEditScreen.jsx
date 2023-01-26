@@ -9,6 +9,7 @@ import { listGameDetails, updateGame } from "../actions/gameActions";
 import FormContainer from "../Components/FormContainer";
 import { useParams } from "react-router-dom";
 import { GAME_UPDATE_RESET } from "../constants/gameConstants";
+import Meta from "../Components/Meta";
 
 const GameEditScreen = () => {
   const { id } = useParams();
@@ -97,6 +98,7 @@ const GameEditScreen = () => {
 
   return (
     <>
+      <Meta title="Éditer un jeu" />
       <Link to="/admin/games" className="btn btn-light my-3">
         Retour
       </Link>

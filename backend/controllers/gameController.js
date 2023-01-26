@@ -20,7 +20,6 @@ const getGames = expressAsyncHandler(async (req, res) => {
 
   const count = await Game.countDocuments({ ...keyword });
   const games = await Game.find({ ...keyword })
-    .sort({ name: 1 })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 

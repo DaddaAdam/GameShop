@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import Loader from "../Components/Loader";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import Meta from "../Components/Meta";
 
 const OrderScreen = () => {
   const { id } = useParams();
@@ -65,6 +66,7 @@ const OrderScreen = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
+      <Meta title="Détails commande" />
       <h1>Commande n° {order._id}</h1>
       <Row>
         <Col md={8}>

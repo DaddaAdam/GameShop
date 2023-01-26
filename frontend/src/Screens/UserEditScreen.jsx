@@ -8,6 +8,7 @@ import { getuserDetails, updateUser } from "../actions/userActions";
 import FormContainer from "../Components/FormContainer";
 import { useParams } from "react-router-dom";
 import { USER_UPDATE_RESET } from "../constants/userConstants";
+import Meta from "../Components/Meta";
 
 const UserEditScreen = () => {
   const { id } = useParams();
@@ -58,6 +59,7 @@ const UserEditScreen = () => {
 
   return (
     <>
+      <Meta title="Éditer un utilisateur" />
       <Link to="/admin/users" className="btn btn-light my-3">
         Retour
       </Link>

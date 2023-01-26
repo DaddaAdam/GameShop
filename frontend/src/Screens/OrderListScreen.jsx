@@ -6,6 +6,7 @@ import Message from "../Components/Message";
 import Loader from "../Components/Loader";
 import { listOrders } from "../actions/orderActions";
 import { LinkContainer } from "react-router-bootstrap";
+import Meta from "../Components/Meta";
 
 const OrderListScreen = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ const OrderListScreen = () => {
   }, [dispatch, userInfo, navigate]);
   return (
     <>
-      <h1>Utilisateurs</h1>
+      <Meta title="Commandes" />
+      <h1>Commandes</h1>
       {loading ? (
         <Loader />
       ) : error ? (

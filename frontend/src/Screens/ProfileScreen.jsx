@@ -7,6 +7,7 @@ import Loader from "../Components/Loader";
 import { getuserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { LinkContainer } from "react-router-bootstrap";
+import Meta from "../Components/Meta";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const ProfileScreen = () => {
 
   return (
     <Row>
+      <Meta title={`${name} | Profil`} />
       <Col md={3}>
         <h2>Profil </h2>
         {message && <Message variant="danger">{message}</Message>}

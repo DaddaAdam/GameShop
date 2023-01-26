@@ -6,6 +6,7 @@ import Message from "../Components/Message";
 import Loader from "../Components/Loader";
 import { listUsers, deleteUser } from "../actions/userActions";
 import { LinkContainer } from "react-router-bootstrap";
+import Meta from "../Components/Meta";
 const UserListScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const UserListScreen = () => {
   }, [dispatch, userInfo, navigate, successDelete]);
   return (
     <>
+      <Meta title="Utilisateurs" />
       <h1>Utilisateurs</h1>
       {loading ? (
         <Loader />
