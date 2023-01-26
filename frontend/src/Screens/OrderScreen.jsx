@@ -154,7 +154,7 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Taxes</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>${order.taxPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
