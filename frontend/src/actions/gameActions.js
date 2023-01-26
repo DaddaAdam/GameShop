@@ -20,23 +20,27 @@ import {
   GAME_CREATE_REVIEW_FAIL,
 } from "../constants/gameConstants";
 
-export const listGames = keyword => async dispatch => {
-  try {
-    dispatch({ type: GAME_LIST_REQUEST });
+export const listGames =
+  (keyword = "", pageNumber = "") =>
+  async dispatch => {
+    try {
+      dispatch({ type: GAME_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/games?keyword=${keyword}`);
+      const { data } = await axios.get(
+        `/api/games?keyword=${keyword}&pageNumber=${pageNumber}`
+      );
 
-    dispatch({ type: GAME_LIST_SUCCESS, payload: data });
-  } catch (err) {
-    dispatch({
-      type: GAME_LIST_FAIL,
-      payload:
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : err.message,
-    });
-  }
-};
+      dispatch({ type: GAME_LIST_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({
+        type: GAME_LIST_FAIL,
+        payload:
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message,
+      });
+    }
+  };
 
 export const listGameDetails = id => async dispatch => {
   try {

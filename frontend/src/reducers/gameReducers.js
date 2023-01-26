@@ -27,7 +27,12 @@ export const gameListReducer = (state = { games: [] }, action) => {
     case GAME_LIST_REQUEST:
       return { loading: true, games: [] };
     case GAME_LIST_SUCCESS:
-      return { loading: false, games: action.payload };
+      return {
+        loading: false,
+        games: action.payload.games,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      };
     case GAME_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const Searchbox = () => {
   const [keyword, setKeyword] = useState("");

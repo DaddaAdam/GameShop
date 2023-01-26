@@ -32,6 +32,11 @@ function App() {
             <Route path="/admin/users" element={<UserListScreen />} />
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
             <Route path="/search/:keyword" element={<Homescreen />} />
+            <Route
+              path="/search/:keyword/page/pageNumber"
+              element={<Homescreen />}
+            />
+            <Route path="/page/:pageNumber" element={<Homescreen />} />
             <Route exact path="/" element={<Homescreen />} />
             <Route path="/game/:id" element={<Gamescreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />

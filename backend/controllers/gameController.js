@@ -5,6 +5,9 @@ import expressAsyncHandler from "express-async-handler";
 // @route   GET /api/games
 // @access  Public
 const getGames = expressAsyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
   const keyword =
     req.query.keyword.toString() !== "undefined"
       ? {
@@ -15,10 +18,12 @@ const getGames = expressAsyncHandler(async (req, res) => {
         }
       : {};
 
-  console.log(keyword);
-  const games = await Game.find({ ...keyword });
+  const count = await Game.countDocuments({ ...keyword });
+  const games = await Game.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
-  res.json(games);
+  res.json({ games, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Récupérer un jeu par son Id
