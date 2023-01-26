@@ -15,6 +15,9 @@ import {
   GAME_UPDATE_REQUEST,
   GAME_UPDATE_SUCCESS,
   GAME_UPDATE_FAIL,
+  GAME_CREATE_REVIEW_REQUEST,
+  GAME_CREATE_REVIEW_SUCCESS,
+  GAME_CREATE_REVIEW_FAIL,
 } from "../constants/gameConstants";
 
 export const listGames = () => async dispatch => {
@@ -157,3 +160,37 @@ export const updateGame = game => async (dispatch, getState) => {
     });
   }
 };
+
+export const gameCreateReview =
+  (gameId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: GAME_CREATE_REVIEW_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      await axios.post(`/api/games/${gameId}/reviews`, review, config);
+
+      dispatch({
+        type: GAME_CREATE_REVIEW_SUCCESS,
+      });
+    } catch (err) {
+      dispatch({
+        type: GAME_CREATE_REVIEW_FAIL,
+        payload:
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message,
+      });
+    }
+  };
