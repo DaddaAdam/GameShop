@@ -99,4 +99,50 @@ const updateGame = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { getGames, getGameById, createGame, updateGame, deleteGame };
+// @desc    Créer un nouveau commentaire
+// @route   POST /api/games/:id/reviews
+// @access  Private
+const createNewReview = expressAsyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+
+  const game = await Game.findById(req.params.id);
+  if (game) {
+    const alreadyReviewed = game.reviews.find(
+      r => r.user.toString() === req.user._id.toString()
+    );
+
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Vous avez déjà évalué ce jeu.");
+    }
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+
+    game.reviews.push(review);
+    game.numReviews = game.reviews.length;
+    game.rating =
+      game.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      game.reviews.length;
+
+    const updatedGame = await game.save();
+    res.status(201).json({
+      message: "Evaluation ajoutée.",
+    });
+  } else {
+    res.status(404);
+    throw new Error("Le jeu spécifié n'existe pas.");
+  }
+});
+
+export {
+  getGames,
+  getGameById,
+  createGame,
+  updateGame,
+  deleteGame,
+  createNewReview,
+};

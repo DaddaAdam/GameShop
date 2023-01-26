@@ -5,6 +5,7 @@ import {
   createGame,
   updateGame,
   deleteGame,
+  createNewReview,
 } from "../controllers/gameController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -16,5 +17,6 @@ router
   .get(getGameById)
   .put(protect, admin, updateGame)
   .delete(protect, admin, deleteGame);
+router.route("/:id/reviews").post(protect, createNewReview);
 
 export default router;

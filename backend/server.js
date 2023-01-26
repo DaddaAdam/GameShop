@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
 import connectDB from "./config/db.js";
 import gameRoutes from "./routes/gameRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
@@ -12,6 +13,7 @@ dotenv.config();
 
 connectDB(process.env.CONNECTION_STRING);
 
+app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/api/games", gameRoutes);
