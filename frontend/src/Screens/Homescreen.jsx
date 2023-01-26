@@ -7,6 +7,7 @@ import { listGames } from "../actions/gameActions";
 import Loader from "../Components/Loader";
 import Message from "../Components/Message";
 import Paginate from "../Components/Paginate";
+import GameCarousel from "../Components/GameCarousel";
 
 const Homescreen = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Homescreen = () => {
 
   return (
     <>
+      {!keyword && <GameCarousel />}
+      <h1>Jeux à la une</h1>
       {loading ? (
         <Loader />
       ) : error ? (

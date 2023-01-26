@@ -6,12 +6,14 @@ import {
   updateGame,
   deleteGame,
   createNewReview,
+  getTopGames,
 } from "../controllers/gameController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.route("/").get(getGames).post(protect, admin, createGame);
+router.get("/top", getTopGames);
 router
   .route("/:id")
   .get(getGameById)

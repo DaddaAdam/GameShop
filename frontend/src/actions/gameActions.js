@@ -18,6 +18,9 @@ import {
   GAME_CREATE_REVIEW_REQUEST,
   GAME_CREATE_REVIEW_SUCCESS,
   GAME_CREATE_REVIEW_FAIL,
+  GAME_TOP_REQUEST,
+  GAME_TOP_SUCCESS,
+  GAME_TOP_FAIL,
 } from "../constants/gameConstants";
 
 export const listGames =
@@ -198,3 +201,21 @@ export const gameCreateReview =
       });
     }
   };
+
+export const listTopGames = () => async dispatch => {
+  try {
+    dispatch({ type: GAME_TOP_REQUEST });
+
+    const { data } = await axios.get("/api/games/top");
+
+    dispatch({ type: GAME_TOP_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({
+      type: GAME_TOP_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};

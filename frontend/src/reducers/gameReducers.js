@@ -20,6 +20,9 @@ import {
   GAME_CREATE_REVIEW_SUCCESS,
   GAME_CREATE_REVIEW_FAIL,
   GAME_CREATE_REVIEW_RESET,
+  GAME_TOP_REQUEST,
+  GAME_TOP_SUCCESS,
+  GAME_TOP_FAIL,
 } from "../constants/gameConstants";
 
 export const gameListReducer = (state = { games: [] }, action) => {
@@ -113,6 +116,19 @@ export const gameReviewCreateReducer = (state = {}, action) => {
     case GAME_CREATE_REVIEW_RESET: {
       return {};
     }
+    default:
+      return state;
+  }
+};
+
+export const gameTopRatedReducer = (state = { games: [] }, action) => {
+  switch (action.type) {
+    case GAME_TOP_REQUEST:
+      return { loading: true, games: [] };
+    case GAME_TOP_SUCCESS:
+      return { loading: false, games: action.payload };
+    case GAME_TOP_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

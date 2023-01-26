@@ -20,6 +20,7 @@ const getGames = expressAsyncHandler(async (req, res) => {
 
   const count = await Game.countDocuments({ ...keyword });
   const games = await Game.find({ ...keyword })
+    .sort({ name: 1 })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
@@ -154,6 +155,15 @@ const createNewReview = expressAsyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Récupérer le top des jeux
+// @route   GET /api/games/top
+// @access  Public
+const getTopGames = expressAsyncHandler(async (req, res) => {
+  const games = await Game.find({}).sort({ rating: -1 }).limit(4);
+
+  res.json(games);
+});
+
 export {
   getGames,
   getGameById,
@@ -161,4 +171,5 @@ export {
   updateGame,
   deleteGame,
   createNewReview,
+  getTopGames,
 };

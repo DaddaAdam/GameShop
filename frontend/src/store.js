@@ -8,6 +8,7 @@ import {
   gameUpdateReducer,
   gameDeleteReducer,
   gameReviewCreateReducer,
+  gameTopRatedReducer,
 } from "./reducers/gameReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   gameUpdate: gameUpdateReducer,
   gameDelete: gameDeleteReducer,
   gameReviewCreate: gameReviewCreateReducer,
+  gameTopRated: gameTopRatedReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
