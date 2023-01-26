@@ -5,7 +5,18 @@ import expressAsyncHandler from "express-async-handler";
 // @route   GET /api/games
 // @access  Public
 const getGames = expressAsyncHandler(async (req, res) => {
-  const games = await Game.find({});
+  const keyword =
+    req.query.keyword.toString() !== "undefined"
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+  console.log(keyword);
+  const games = await Game.find({ ...keyword });
 
   res.json(games);
 });

@@ -20,11 +20,11 @@ import {
   GAME_CREATE_REVIEW_FAIL,
 } from "../constants/gameConstants";
 
-export const listGames = () => async dispatch => {
+export const listGames = keyword => async dispatch => {
   try {
     dispatch({ type: GAME_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/games");
+    const { data } = await axios.get(`/api/games?keyword=${keyword}`);
 
     dispatch({ type: GAME_LIST_SUCCESS, payload: data });
   } catch (err) {
