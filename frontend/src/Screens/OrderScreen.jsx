@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Image, ListGroup, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import Message from "../Components/Message";
 import { Link, useParams } from "react-router-dom";

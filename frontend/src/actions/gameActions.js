@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.js";
 import {
   GAME_LIST_REQUEST,
   GAME_LIST_SUCCESS,
