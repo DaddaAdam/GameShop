@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "homepage": ".",
-  "proxy": "http://http://68.183.35.226",
+  "proxy": "http://68.183.35.226",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
